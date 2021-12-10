@@ -2,9 +2,12 @@
 
 {% block content %} 
 <form method="POST">
-    <h3 align="center">Restaurant Randomizer</h3>
+    <h1 align="center">Restaurant Randomizer</h1>
+    <br />
+    <h4 align="center">Welcome! This site redirects you to a random restaurant nearby.</h4>
+    <br />
     <div class="form-group">
-        <label for="location">Location</label>
+        <label for="location">Location (Please only use letters, digits and spaces)</label>
         <input 
             type="location" 
             class="form-control" 
@@ -13,16 +16,30 @@
             placeholder="Enter location"
         />
     </div>
-    <div class="form-group">
-        <label for="rating">Rating</label>
-        <input 
-            type="rating" 
-            class="form-control" 
-            id="rating"
-            name="rating" 
-            placeholder="Enter rating"
-        />
+
+    <label>Minimum rating</label>
+    <br />
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="rating" id="rating" value=0>
+        <label class="form-check-label" for="rating">0 &#9733;</label>
     </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="rating" id="rating" value=1>
+        <label class="form-check-label" for="rating">1 &#9733;</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="rating" id="inlineratingRadio1" value=2>
+        <label class="form-check-label" for="rating">2 &#9733;</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="rating" id="rating" value=3>
+        <label class="form-check-label" for="rating">3 &#9733;</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="rating" id="rating" value=4>
+        <label class="form-check-label" for="rating">4 &#9733;</label>
+    </div>
+
     <br />
     <button type="submit" class="btn btn-primary">Submit</button>
     {% endblock %}
