@@ -26,8 +26,9 @@ def home():
                 flash(f"Restaurant found!", category='success')
 
                 open_new_tab(restaurant_url)
-            
+
             except:
                 flash("No nearby restaurants found with these conditions. Please try again with a different input.", category='error')
 
     return render_template("home.html")
+

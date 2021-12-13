@@ -3,9 +3,8 @@ from urllib.request import urlopen
 import json
 import random
 
+
 API_KEY = "AIzaSyC-2_Gt3pY8MwACEdVZBEXA4xHkIHAlFys"
-location = "Leidseplein Amsterdam"
-rating = "4"
 
 class Random_restaurant:
 
