@@ -25,7 +25,7 @@ def home():
                 restaurant_url = search.randomize(restaurant_ids)
                 flash(f"Restaurant found!", category='success')
 
-                open_new_tab(restaurant_url)
+                return render_template("home.html", restaurant_url=restaurant_url)
 
             except:
                 flash("No nearby restaurants found with these conditions. Please try again with a different input.", category='error')

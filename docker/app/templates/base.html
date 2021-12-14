@@ -53,9 +53,10 @@
         crossorigin="anonymous"
     ></script>
 
-    <script
-    window.open(restaurant_url, '_blank')
-    ></script>
+    <script type="text/javascript">
+      var url = '{{ restaurant_url }}'
+      window.open(url, '_blank').focus()
+   </script>
 
   </body>
 </html>
