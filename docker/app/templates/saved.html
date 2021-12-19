@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block title %}Saved{% endblock %}
+
+{% block content %} 
+<br />
+<h3 align="center">Saved restaurants</h3>
+<ul class="list-group list-group-flush" id="saved-restaurants">
+    {% if user.saved %}
+    {% for restaurant in user.saved %}
+    <li class="list-group-item">
+        <button type="button" class="btn btn-link" onclick="window.open('{{ restaurant.place_url }}', '_blank').focus()">{{ restaurant.place_name }}</button> 
+        <button type="button" class="close" onClick="deleteSaved({{ restaurant.id }})">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </li>
+    {% endfor %}
+    {% else %}
+    <br />
+    <h6 align="center">No previous restaurant redirects found.<br />
+        Try coming back to this page after searching for a restaurant.
+    </h6>
+    {% endif %}
+
+</ul>
+{% endblock %}
