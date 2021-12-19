@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import current_user, login_required
 import random
 import json
-#import redis
 
 from . import db
 from app import cache
@@ -10,7 +9,6 @@ from .models import Random_restaurant, Saved_restaurant
 
 views = Blueprint('views', __name__)
 
-#cache = redis.Redis(host='redis', port=6379)
 
 API_KEY = "AIzaSyC-2_Gt3pY8MwACEdVZBEXA4xHkIHAlFys"
 
