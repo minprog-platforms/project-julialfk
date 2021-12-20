@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, jsonify
+from flask import Blueprint, render_template, request, flash, jsonify, url_for
 from flask_login import current_user, login_required
 import random
 import json
@@ -128,4 +128,4 @@ def delete_saved():
             db.session.delete(saved_restaurant)
             db.session.commit()
 
-    return jsonify({})
+    return jsonify(dict(redirect=url_for('views.saved')))
