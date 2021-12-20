@@ -128,4 +128,4 @@ def delete_saved():
             db.session.delete(saved_restaurant)
             db.session.commit()
 
-    return jsonify(dict(redirect=url_for('views.saved')))
+    return jsonify({})
