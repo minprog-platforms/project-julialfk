@@ -31,11 +31,11 @@
         <div class="navbar-nav">
           <a class="nav-item nav-link" id="home" href="/">Home</a>
           {% if user.is_authenticated %}
-          <a class="nav-item nav-link" id="saved" href="/saved">Saved</a>
-          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+          <a class="nav-item nav-link" id="saved" href="{{ url_for('views.saved') }}">Saved</a>
+          <a class="nav-item nav-link" id="logout" href="{{ url_for('auth.logout') }}">Logout</a>
           {% else %}
-          <a class="nav-item nav-link" id="login" href="/login">Login</a>
-          <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+          <a class="nav-item nav-link" id="login" href="{{ url_for('auth.login') }}">Login</a>
+          <a class="nav-item nav-link" id="signUp" href="{{ url_for('auth.sign_up') }}">Sign Up</a>
           {% endif %}
         </div>
       </div>
@@ -80,6 +80,7 @@
       src="{{ url_for('static', filename='index.js') }}"
     ></script>
 
+    <!-- if a url is returned, open url in new tab and disable the retry button -->
     {% if restaurant_url %}
     <script type="text/javascript">
       var url_raw = '{{ restaurant_url }}'

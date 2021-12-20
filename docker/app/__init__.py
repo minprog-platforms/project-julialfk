@@ -5,6 +5,7 @@ from flask_login import LoginManager
 from os import path
 
 
+# configure cache and database
 cache = Cache(config={
     'CACHE_TYPE': 'RedisCache',
     'CACHE_REDIS_HOST': 'redis',
@@ -31,15 +32,17 @@ def create_app():
     app.register_blueprint(auth, url_prefix='/')
 
     # check if classes exist
-    from .models import User, Saved_restaurant
+    from .models import User, Saved_restaurant, Random_restaurant
 
     # check if db exists
     create_database(app)
 
+    # set up flask login
     login_manager = LoginManager()
     login_manager.login_view = 'views.home'
     login_manager.init_app(app)
 
+    # instructions to load user
     @login_manager.user_loader
     def load_user(id):
         return User.query.get(int(id))

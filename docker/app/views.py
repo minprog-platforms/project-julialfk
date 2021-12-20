@@ -15,8 +15,8 @@ API_KEY = "AIzaSyC-2_Gt3pY8MwACEdVZBEXA4xHkIHAlFys"
 
 @views.route('/', methods=['GET', 'POST'])
 def home():
+# returns an API request url if 'Search' or 'Retry' are clicked
     if request.method == 'POST':
-        # returns an API request url if 'Search' or 'Retry' are clicked
         if request.form['submit'] == 'Search':
             restaurant_url = first_search()
 
@@ -112,13 +112,15 @@ def save_restaurant(random_restaurant, restaurant_url):
 @views.route('/saved')
 @login_required
 def saved():
+# page with all previously generated links to restaurants
     return render_template("saved.html", user=current_user)
 
 
 @views.route('/delete-saved', methods=['POST'])
 def delete_saved():
+# page that deletes a note when prompted
     saved_restaurant = json.loads(request.data)
-    restaurant_id = saved_restaurant['placeId']
+    restaurant_id = saved_restaurant
     saved_restaurant = Saved_restaurant.query.get(restaurant_id)
 
     if saved_restaurant:
