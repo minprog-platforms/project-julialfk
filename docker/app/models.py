@@ -9,6 +9,7 @@ from . import db
 
 API_KEY = "AIzaSyC-2_Gt3pY8MwACEdVZBEXA4xHkIHAlFys"
 
+
 class Saved_restaurant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     place_name = db.Column(db.String(10000))
@@ -23,16 +24,16 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
     saved = db.relationship('Saved_restaurant')
-    
+
+
 class Random_restaurant:
 
     def __init__(self, location, rating):
         self._location = location
         self._rating = rating
 
-    # looks up coordinates of current location
     def current_coords(self):
-
+    # looks up coordinates of current location
         # reformat prompted location string
         address = self._location.replace(" ", "%20")
 
@@ -47,9 +48,8 @@ class Random_restaurant:
 
         return coordinates_str
 
-
     def nearby_search(self, current_coords, rating):
-
+    # returns a list of names and place_ids of restaurants that meet the given conditions
         # request json data of nearby restaurants from Places API
         search_url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={current_coords}&radius=1000&type=restaurant&key={API_KEY}"
         

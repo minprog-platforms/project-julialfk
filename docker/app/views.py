@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, jsonify, url_for
+from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import current_user, login_required
 import random
 import json
@@ -7,8 +7,8 @@ from . import db
 from app import cache
 from .models import Random_restaurant, Saved_restaurant
 
-views = Blueprint('views', __name__)
 
+views = Blueprint('views', __name__)
 
 API_KEY = "AIzaSyC-2_Gt3pY8MwACEdVZBEXA4xHkIHAlFys"
 
@@ -23,7 +23,7 @@ def home():
             return render_template("home.html", restaurant_url=restaurant_url, user=current_user)
         elif request.form['submit'] == 'Retry':
             restaurant_url = retry_search()
-            
+
             return render_template("home.html", restaurant_url=restaurant_url, user=current_user)
 
     return render_template("home.html", user=current_user)
@@ -46,24 +46,24 @@ def first_search():
             search = Random_restaurant(location, rating)
             current_coords = search.current_coords()
             restaurant_data = search.nearby_search(current_coords, search._rating)
-            
+
             # cache list of restaurant names and ids
             cache.set('restaurants', json.dumps(restaurant_data))
 
             # take random set of restaurant name and id
             random_restaurant = randomize(restaurant_data)
-            restaurant_id = random_restaurant['id']            
+            restaurant_id = random_restaurant['id']
             restaurant_url = f"https://www.google.com/maps/search/?api=1&query=Google&query_place_id={restaurant_id}&key={API_KEY}"
 
             # check if this restaurant has been saved before if user is logged in
             if current_user.is_authenticated:
                 save_restaurant(random_restaurant, restaurant_url)
 
-            flash(f"Restaurant found!", category='success')
+            flash("Restaurant found!", category='success')
 
             return restaurant_url
         except:
-            flash(f"No nearby restaurants found with these conditions. Please try again with a different input.", category='error')
+            flash("No nearby restaurants found with these conditions. Please try again with a different input.", category='error')
 
 
 def retry_search():
@@ -74,14 +74,14 @@ def retry_search():
 
         # take a random restaurant from the list and create url
         random_restaurant = randomize(restaurant_data)
-        restaurant_id = random_restaurant['id']            
+        restaurant_id = random_restaurant['id']
         restaurant_url = f"https://www.google.com/maps/search/?api=1&query=Google&query_place_id={restaurant_id}&key={API_KEY}"
-        
+
         # check if this restaurant has been saved before if user is logged in
         if current_user.is_authenticated:
             save_restaurant(random_restaurant, restaurant_url)
 
-        flash(f"Restaurant found!", category='success')
+        flash("Restaurant found!", category='success')
 
         return restaurant_url
     except:
@@ -97,16 +97,16 @@ def randomize(restaurant_data):
 
     return random_restaurant
 
+
 def save_restaurant(random_restaurant, restaurant_url):
 # checks if restaurant is saved yet and saves it if not
     saved_restaurant = Saved_restaurant.query.filter_by(place_url=restaurant_url).first()
-    
+
     if not saved_restaurant:
         restaurant_name = random_restaurant['name']
         new_saved = Saved_restaurant(place_name=restaurant_name, place_url=restaurant_url, user_id=current_user.id)
         db.session.add(new_saved)
         db.session.commit()
-
 
 
 @views.route('/saved')
