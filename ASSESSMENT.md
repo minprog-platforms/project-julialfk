@@ -1,0 +1,6 @@
+# Assessment
+What I am most proud of after finishing this project is the many different components I have taught myself to use for this program. Initially, I was only planning to use Google's APIs and Flask, but after adding more functionalities, I am now also more familiar with JavaScript, caching and databases. 
+
+I am very happy with how the retry button and the deletion of saved restaurants came out, since these are the functions that gave me the most trouble during development. The retry button also has a fail save, so an error message flashes on the page if the button is somehow enabled without cached input (by using inspect element for example). 
+
+As a sidenote, I have not replaced my personal API key from the code for ease of testing while grading. I have written instructions to use one's own API key and I will deactivate mine and replace it with a placeholder after receiving my grade. I also deliberately kept 'date' property in the 'Saved_restaurant' class, in case I wanted to use this in a later version of the app without manually changing the database or having to delete it.

@@ -80,7 +80,7 @@
       src="{{ url_for('static', filename='index.js') }}"
     ></script>
 
-    <!-- if a url is returned, open url in new tab and disable the retry button -->
+    <!-- if a url is returned, open url in new tab and enable the retry button -->
     {% if restaurant_url %}
     <script type="text/javascript">
       var url_raw = '{{ restaurant_url }}'
